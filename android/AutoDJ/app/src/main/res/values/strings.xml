@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">AutoDJ</string>
+    
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="age_span_1">18-25</string>
+    <string name="age_span_2">26-35</string>
+    <string name="age_span_3">36-45</string>
+    <string name="age_span_4">46-55</string>
+    <string name="age_span_5">56+</string>
+    <string name="increment">+</string>
+    <string name="decrement">-</string>
+
 </resources>

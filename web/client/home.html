@@ -1,17 +1,39 @@
 <template name="home">
 	<div class="page">
-		<h1>DeeeeeDjay</h1>
-		
+
+		<!-- <div id="now-playing">
+			Now Playing: Håkan Hellström - Din tid kommer
+		</div> -->
+		{{> nowPlaying }}
+
+		<!-- <h1>DeeeeeDjay</h1> -->
 		{{> currentGuests }}
-		{{> genderRatio}}
-		{{> ageRatio}}
+		<!-- {{> genderRatio}} -->
+		<!-- {{> ageRatio}} -->
+		{{> nextTrack }}
 
   </div>
 </template>
 
+<template name="nowPlaying">
+	<div id="now-playing">
+		<span class="left-col">Now Playing:</span>
+		<span class="mid-col">Håkan Hellström - Din tid kommer</span>
+		<span class="right-col">&nbsp;</span>
+	</div>
+</template>
+
+<template name="nextTrack">
+	<div id="next-track">
+		<span class="left-col">Next Song:</span>
+		<span class="mid-col">Zara Larsson - Lush Life</span>
+		<span class="right-col count-down">00:07</span>
+	</div>
+</template>
+
 <template name="currentGuests">
 	<div class="current-guests-container">
-		<h2>Total</h2>
+		<!-- <h2>Total</h2> -->
 		{{ getNumberOfGuests }}
 	</div>
 </template>

@@ -1,0 +1,28 @@
+@import url(https://fonts.googleapis.com/css?family=Quicksand:400,700,300);
+
+
+// Typography
+$default-font: 				'Quicksand', sans-serif;
+$default-font-size: 	18px;
+
+// Colors
+$white:									 	#f3f3f3;
+$white-transparent-high: 	rgba($white, 0.1);
+$white-transparent-low: 	rgba($white, 0.7);
+$grey: 										#303030;
+$light-grey:							#494949;
+
+// Sizes
+$border-width:					 	2px;
+$cross-size: 							18px;
+$form-margin:							0.5em;
+$transition-distance-px: 	100px;
+$transition-distance-em:	2em;
+
+// Mobile
+$mobile-size:							1010px;
+
+// Times
+$transition-time:				0.4s;
+$transition-time-short: 0.2s;
+$delay-time:						0.4s;

@@ -8,7 +8,23 @@ Template.home.onCreated(function() {
     };
     Meteor.loginWithSpotify(options, function(err) {
       console.log(err || "No error");
+      
+      Meteor.call('GuestUpdates.methods.getElvis', {}, (err, res) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log('hej');
+        }
+      });
     });
+  });
+});
+
+Template.carousel.onRendered(() => {
+  $('#carousel').slick({
+    autoplay: true,
+    autoplaySpeed: 2000,
+    infinite: true,
   });
 });
 

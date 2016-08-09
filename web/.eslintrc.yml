@@ -38,5 +38,5 @@ globals:
   
   # constants
   # e.g. Constants: true
-  Constansts: true
+  Constants: true
   Helpers: true

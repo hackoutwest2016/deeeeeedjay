@@ -19,6 +19,7 @@ p {
 img {
 	width: 100%;
 }
+
 .left-col {
   width: 20vw;
   float: left;
@@ -75,4 +76,8 @@ img {
   color: #FFFFFF;
   font-weight: bold;
   text-shadow: 2px 2px 20px #000000;
+}
+
+#__blaze-root, .page {
+	height: 100%;
 }

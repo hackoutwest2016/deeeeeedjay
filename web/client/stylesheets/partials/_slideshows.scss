@@ -1,0 +1,25 @@
+#carousel {
+  position: fixed;
+  height: 100%;
+  width: 100%
+}
+
+.slick-list, .slick-track, .slick-slide {
+  height: 100%;
+}
+
+.slick-list {
+  position: relative;
+}
+
+.slider-text-container {
+  position: absolute;
+  width: 70%;
+  height: 25%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  top: 0;
+  margin: auto;
+  overflow: auto;
+}

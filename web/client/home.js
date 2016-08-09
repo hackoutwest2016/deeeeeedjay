@@ -12,6 +12,14 @@ Template.home.onCreated(function() {
   });
 });
 
+Template.carousel.onRendered(() => {
+  $('#carousel').slick({
+    autoplay: true,
+    autoplaySpeed: 2000,
+    infinite: true,
+  });
+});
+
 Template.currentGuests.helpers({
   getNumberOfGuests() {
     return getFieldAmount(GuestUpdates.find().fetch(), () => {

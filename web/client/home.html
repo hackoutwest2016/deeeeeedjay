@@ -1,30 +1,29 @@
 <template name="home">
 	<div class="page">
-		<h1>DeeeeeDjay</h1>
-		
-		{{> currentGuests }}
-		{{> genderRatio}}
-		{{> ageRatio}}
-
+		{{> carousel}}
   </div>
+</template>
+
+<template name="carousel">
+	<div id="carousel">
+		{{> currentGuests}}
+		{{> genderRatio}}
+	</div>
 </template>
 
 <template name="currentGuests">
 	<div class="current-guests-container">
-		<h2>Total</h2>
-		{{ getNumberOfGuests }}
+		<div class="slider-text-container">
+			<h2>Come on, there's {{ getNumberOfGuests }} people in here,</h2>
+			<h1>Get on the dancefloor!</h1>
+		</div>
 	</div>
 </template>
 
 <template name="genderRatio">
 	<div class="gender-ratio-container">
-		<div class="number-of-women-container">
-			<h2>Women</h2>
-			{{ getNumberOfWomen }}
-		</div>
-		<div class="number-of-men-container">
-			<h2>Men</h2>
-			{{ getNumberOfMen }}
+		<div class="slider-text-container">
+			<h2>Right now, there's {{ getNumberOfWomen }} women and {{ getNumberOfMen }} men up in here!</h2>
 		</div>
 	</div>
 </template>

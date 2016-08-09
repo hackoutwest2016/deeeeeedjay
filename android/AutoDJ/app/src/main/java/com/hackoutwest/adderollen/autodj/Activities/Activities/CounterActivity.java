@@ -12,6 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.hackoutwest.adderollen.autodj.Activities.AsyncTasks.AsyncSendClick;
+import com.hackoutwest.adderollen.autodj.Activities.AsyncTasks.AsyncSendUpdate;
 import com.hackoutwest.adderollen.autodj.Activities.Constants;
 import com.hackoutwest.adderollen.autodj.R;
 
@@ -254,7 +256,7 @@ public class CounterActivity extends AppCompatActivity {
         Log.d(TAG, "VALUE: " + incDec);
 
         //new AsyncSendClick(this).execute(parameters);
-
+        new AsyncSendUpdate(this).execute(parameters);
     }
 
     private int getCheckedGenderId() {

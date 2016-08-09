@@ -24,6 +24,12 @@ Template.genderRatio.helpers({
     });
   },
 });
+
+Template.genderRatio.helpers({
+
+});
+
+
 function getFieldAmount(array, fun) {
   let currentAmount = 0;
   _.each(array, (item) => {

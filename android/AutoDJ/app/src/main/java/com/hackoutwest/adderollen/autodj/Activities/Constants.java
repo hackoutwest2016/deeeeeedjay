@@ -32,7 +32,7 @@ public class Constants {
     public static final int DEC = 102;
     public static final String DEC_STRING = "DEC";
 
-    public static final String BASE_URL = "http://www.RANDOMURL.com";
+    public static final String BASE_URL = "http://hack.andreasrolen.com";
 
 
 }

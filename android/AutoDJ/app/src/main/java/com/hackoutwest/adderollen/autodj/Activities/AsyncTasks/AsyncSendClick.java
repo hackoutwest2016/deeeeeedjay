@@ -46,7 +46,7 @@ public class AsyncSendClick extends AsyncTask<Map<String, String>, Void, Integer
         Long timestamp = new Date().getTime();
 
         try {
-            String url = Constants.BASE_URL + "/updates";
+            String url = Constants.BASE_URL + "/guestUpdates";
             URL urlObj = new URL(url);
             HttpURLConnection connection = (HttpURLConnection) urlObj.openConnection();
 

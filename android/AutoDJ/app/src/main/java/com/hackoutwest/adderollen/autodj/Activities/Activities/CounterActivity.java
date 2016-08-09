@@ -84,6 +84,7 @@ public class CounterActivity extends AppCompatActivity {
         checkBoxes[2] = ageThreeCheckbox;
         checkBoxes[3] = ageFourCheckbox;
         checkBoxes[4] = ageFiveCheckbox;
+        checkBoxes[0].setTextColor(ContextCompat.getColor(this,R.color.white));
 
     }
 
@@ -101,6 +102,7 @@ public class CounterActivity extends AppCompatActivity {
     @OnClick(R.id.gender_male_button)
     public void maleClick() {
         if (!maleIsActive) {
+            isMale = true;
             Drawable genderDrawable = getDrawable(R.drawable.sel_radiobutton_male) ;
 
             maleIsActive = true;
@@ -111,6 +113,7 @@ public class CounterActivity extends AppCompatActivity {
             for (int i = 0; i < checkBoxes.length; i++) {
                 if (checkBoxes[i].isChecked()) {
                     checkBoxes[i].setBackground(genderDrawable);
+                    checkBoxes[i].setTextColor(ContextCompat.getColor(this,R.color.white));
                 }
             }
         }
@@ -121,16 +124,19 @@ public class CounterActivity extends AppCompatActivity {
     @OnClick(R.id.gender_female_button)
     public void femaleClick() {
         if (!femaleIsActive) {
+            isMale = false;
             Drawable genderDrawable = getDrawable(R.drawable.sel_radiobutton_female);
 
             femaleIsActive = true;
             maleIsActive = false;
             femaleButton.setBackgroundColor(ContextCompat.getColor(this,R.color.female));
+
             maleButton.setBackgroundColor(ContextCompat.getColor(this,R.color.white));
 
             for (int i = 0; i < checkBoxes.length; i++) {
                 if (checkBoxes[i].isChecked()) {
                     checkBoxes[i].setBackground(genderDrawable);
+                    checkBoxes[i].setTextColor(ContextCompat.getColor(this,R.color.white));
                 }
             }
         }
@@ -146,10 +152,12 @@ public class CounterActivity extends AppCompatActivity {
             checkedBox = checkBox.getId();
             Drawable genderDrawable = isMale ? getDrawable(R.drawable.sel_radiobutton_male) : getDrawable(R.drawable.sel_radiobutton_female);
             checkBox.setBackground(genderDrawable);
+            checkBox.setTextColor(ContextCompat.getColor(this,R.color.white));
 
             for (int i = 0; i < checkBoxes.length; i++) {
                 if (checkBoxes[i].getId() != checkBox.getId()) {
                     checkBoxes[i].setChecked(false);
+                    checkBoxes[i].setTextColor(ContextCompat.getColor(this,R.color.medium_grey));
                 }
             }
 

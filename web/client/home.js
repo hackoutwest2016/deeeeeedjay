@@ -25,8 +25,31 @@ Template.genderRatio.helpers({
   },
 });
 
-Template.genderRatio.helpers({
-
+Template.ageRatio.helpers({
+  getNumberOfTwenties() {
+    const guestUpdates = GuestUpdates.find({ age: 'AGE_GROUP_1' }).fetch();
+    let value = 0;
+    _.each(guestUpdates, (guestUpdate) => {
+      if (guestUpdate.value === 'INC') {
+        value++;
+      } else if (guestUpdate.value === 'DEC') {
+        value--;
+      }
+    });
+    return value;
+  },
+  getNumberOfThirties() {
+    const guestUpdates = GuestUpdates.find({ age: 'AGE_GROUP_2' }).fetch();
+    let value = 0;
+    _.each(guestUpdates, (guestUpdate) => {
+      if (guestUpdate.value === 'INC') {
+        value++;
+      } else if (guestUpdate.value === 'DEC') {
+        value--;
+      }
+    });
+    return value;
+  },
 });
 
 

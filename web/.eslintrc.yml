@@ -25,6 +25,7 @@ globals:
   # collections
   # e.g. Users: true
   Examples: true
+  GuestUpdates: true
 
   # packages
   FlowRouter: false # kadira:flow-router

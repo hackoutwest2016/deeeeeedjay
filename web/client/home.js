@@ -12,6 +12,18 @@ Template.currentGuests.helpers({
   },
 });
 
+Template.genderRatio.helpers({
+  getNumberOfWomen() {
+    return getFieldAmount(GuestUpdates.find().fetch(), (guestUpdate) => {
+      return guestUpdate.gender === 'GENDER_FEMALE';
+    });
+  },
+  getNumberOfMen() {
+    return getFieldAmount(GuestUpdates.find().fetch(), (guestUpdate) => {
+      return guestUpdate.gender === 'GENDER_MALE';
+    });
+  },
+});
 function getFieldAmount(array, fun) {
   let currentAmount = 0;
   _.each(array, (item) => {

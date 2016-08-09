@@ -4,8 +4,8 @@
 		
 		{{> currentGuests }}
 		{{> genderRatio}}
-		
-		<!-- {{> ageRatio}} -->
+		{{> ageRatio}}
+
   </div>
 </template>
 
@@ -29,13 +29,17 @@
 	</div>
 </template>
 
-<!-- <template name="ageRatio">
+<template name="ageRatio">
 	<div class="age-ratio-container">
 		<div class="twenties-age-container">
 			<h2>Twenties</h2>
 			{{ getNumberOfTwenties }}
 		</div>
 		<div class="thirties-age-container">
+			<h2>Thirties</h2>
+			{{ getNumberOfThirties }}
+		</div>
+		<!-- <div class="fourties-age-container">
 			<h2>Twenties</h2>
 			{{ getNumberOfFourties }}
 		</div>
@@ -46,6 +50,6 @@
 		<div class="Sixties-age-container">
 			<h2>Twenties</h2>
 			{{ getNumberOfSixties }}
-		</div>
+		</div> -->
 	</div>
-</template> -->
+</template>

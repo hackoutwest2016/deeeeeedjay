@@ -1,0 +1,38 @@
+# parserOptions:
+# e.g.  ecmaVersion: 6
+
+# register plugins
+# plugins:
+# e.g. - meteor
+
+extends:
+  - lookback/meteor
+
+# registerenvironments
+# env:
+# e.g.  meteor: true
+
+rules:
+# e.g. indent: [error, 2]  # enforce 2-space indention
+
+  comma-dangle: [error, always-multiline]
+  object-curly-spacing: [error, always]
+
+# globals to be excepted from eslint
+globals:
+  # (true/false - allowed to be changed or not)
+  
+  # collections
+  # e.g. Users: true
+  Examples: true
+
+  # packages
+  FlowRouter: false # kadira:flow-router
+  JsonRoutes: false # simple:json-routes
+  moment: false # momentjs:moment
+  ValidatedMethod: false # mdg:validated-method
+  SimpleSchema: false # aldeed:simple-schema
+  CryptoJS: false # jparK
+  
+  # constants
+  # e.g. Constants: true

@@ -11,4 +11,7 @@
     <string name="increment">+</string>
     <string name="decrement">-</string>
 
+    <!-- Texts -->
+    <string name="current_guest_amount">Party animals inside</string>
+
 </resources>

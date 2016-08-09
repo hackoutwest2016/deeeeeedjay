@@ -1,257 +1,200 @@
-var require = meteorInstall({"client":{"template.body.js":function(){
+var require = meteorInstall({"imports":{"components":{"todosList":{"todosList.html":function(require,exports,module){
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                          //
-// client/template.body.js                                                                                  //
-//                                                                                                          //
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                            //
-                                                                                                            // 1
-Template.body.addContent((function() {                                                                      // 2
-  var view = this;                                                                                          // 3
-  return "";                                                                                                // 4
-}));                                                                                                        // 5
-Meteor.startup(Template.body.renderToDocument);                                                             // 6
-                                                                                                            // 7
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                             //
+// imports/components/todosList/todosList.html                                                                 //
+//                                                                                                             //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                               //
+                                                                                                               // 1
+      if (Meteor.isServer) return;                                                                             // 2
+                                                                                                               // 3
+      var templateUrl = "/imports/components/todosList/todosList.html";                                        // 4
+      var template = "<header> <h1>Todo List ( {{$ctrl.incompleteCount}} )</h1> <label class=\"hide-completed\"> <input type=\"checkbox\" ng-model=\"$ctrl.hideCompleted\"> Hide Completed Tasks </label> <form class=\"new-task\" ng-submit=\"$ctrl.addTask($ctrl.newTask)\"> <input ng-model=\"$ctrl.newTask\" type=\"text\" name=\"text\" placeholder=\"Type to add new tasks\"> </form> </header> <ul> <li ng-repeat=\"task in $ctrl.tasks\" ng-class=\"{'checked': task.checked}\"> <button class=\"delete\" ng-click=\"$ctrl.removeTask(task)\">&times;</button> <input type=\"checkbox\" ng-checked=\"task.checked\" ng-click=\"$ctrl.setChecked(task)\" class=\"toggle-checked\"> <span class=\"text\"> {{task.text}} </span> </li></ul> ";
+                                                                                                               // 6
+      angular.module('angular-templates')                                                                      // 7
+        .run(['$templateCache', function($templateCache) {                                                     // 8
+          $templateCache.put(templateUrl, template);                                                           // 9
+        }]);                                                                                                   // 10
+                                                                                                               // 11
+      module.exports = {};                                                                                     // 12
+      module.exports.__esModule = true;                                                                        // 13
+      module.exports.default = templateUrl;                                                                    // 14
+                                                                                                               // 15
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-},"template.home.js":function(){
+},"todosList.js":["babel-runtime/helpers/classCallCheck","angular","angular-meteor","../../api/tasks.js","./todosList.html",function(require,exports,module){
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                          //
-// client/template.home.js                                                                                  //
-//                                                                                                          //
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                            //
-                                                                                                            // 1
-Template.__checkName("home");                                                                               // 2
-Template["home"] = new Template("Template.home", (function() {                                              // 3
-  var view = this;                                                                                          // 4
-  return HTML.DIV({                                                                                         // 5
-    "class": "page"                                                                                         // 6
-  }, HTML.Raw("\n		<h1>DeeeeeDjay</h1>\n		\n		"), Spacebars.include(view.lookupTemplate("currentGuests")), "\n		", Spacebars.include(view.lookupTemplate("genderRatio")), "\n		", Spacebars.include(view.lookupTemplate("ageRatio")), "\n\n  ");
-}));                                                                                                        // 8
-                                                                                                            // 9
-Template.__checkName("currentGuests");                                                                      // 10
-Template["currentGuests"] = new Template("Template.currentGuests", (function() {                            // 11
-  var view = this;                                                                                          // 12
-  return HTML.DIV({                                                                                         // 13
-    "class": "current-guests-container"                                                                     // 14
-  }, HTML.Raw("\n		<h2>Total</h2>\n		"), Blaze.View("lookup:getNumberOfGuests", function() {                // 15
-    return Spacebars.mustache(view.lookup("getNumberOfGuests"));                                            // 16
-  }), "\n	");                                                                                               // 17
-}));                                                                                                        // 18
-                                                                                                            // 19
-Template.__checkName("genderRatio");                                                                        // 20
-Template["genderRatio"] = new Template("Template.genderRatio", (function() {                                // 21
-  var view = this;                                                                                          // 22
-  return HTML.DIV({                                                                                         // 23
-    "class": "gender-ratio-container"                                                                       // 24
-  }, "\n		", HTML.DIV({                                                                                     // 25
-    "class": "number-of-women-container"                                                                    // 26
-  }, "\n			", HTML.Raw("<h2>Women</h2>"), "\n			", Blaze.View("lookup:getNumberOfWomen", function() {       // 27
-    return Spacebars.mustache(view.lookup("getNumberOfWomen"));                                             // 28
-  }), "\n		"), "\n		", HTML.DIV({                                                                           // 29
-    "class": "number-of-men-container"                                                                      // 30
-  }, "\n			", HTML.Raw("<h2>Men</h2>"), "\n			", Blaze.View("lookup:getNumberOfMen", function() {           // 31
-    return Spacebars.mustache(view.lookup("getNumberOfMen"));                                               // 32
-  }), "\n		"), "\n	");                                                                                      // 33
-}));                                                                                                        // 34
-                                                                                                            // 35
-Template.__checkName("ageRatio");                                                                           // 36
-Template["ageRatio"] = new Template("Template.ageRatio", (function() {                                      // 37
-  var view = this;                                                                                          // 38
-  return HTML.DIV({                                                                                         // 39
-    "class": "age-ratio-container"                                                                          // 40
-  }, "\n		", HTML.DIV({                                                                                     // 41
-    "class": "twenties-age-container"                                                                       // 42
-  }, "\n			", HTML.Raw("<h2>Twenties</h2>"), "\n			", Blaze.View("lookup:getNumberOfTwenties", function() {
-    return Spacebars.mustache(view.lookup("getNumberOfTwenties"));                                          // 44
-  }), "\n		"), "\n		", HTML.DIV({                                                                           // 45
-    "class": "thirties-age-container"                                                                       // 46
-  }, "\n			", HTML.Raw("<h2>Thirties</h2>"), "\n			", Blaze.View("lookup:getNumberOfThirties", function() {
-    return Spacebars.mustache(view.lookup("getNumberOfThirties"));                                          // 48
-  }), "\n		"), HTML.Raw('\n		<!-- <div class="fourties-age-container">\n			<h2>Twenties</h2>\n			{{ getNumberOfFourties }}\n		</div>\n		<div class="fifties-age-container">\n			<h2>Twenties</h2>\n			{{ getNumberOfFifties }}\n		</div>\n		<div class="Sixties-age-container">\n			<h2>Twenties</h2>\n			{{ getNumberOfSixties }}\n		</div> -->\n	'));
-}));                                                                                                        // 50
-                                                                                                            // 51
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                             //
+// imports/components/todosList/todosList.js                                                                   //
+//                                                                                                             //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                               //
+var _classCallCheck;module.import('babel-runtime/helpers/classCallCheck',{"default":function(v){_classCallCheck=v}});var angular;module.import('angular',{"default":function(v){angular=v}});var angularMeteor;module.import('angular-meteor',{"default":function(v){angularMeteor=v}});var Tasks;module.import('../../api/tasks.js',{"Tasks":function(v){Tasks=v}});var template;module.import('./todosList.html',{"default":function(v){template=v}});
+                                                                                                               // 1
+                                                                                                               // 2
+                                                                                                               // 3
+                                                                                                               //
+                                                                                                               // 5
+                                                                                                               //
+var TodosListCtrl = function () {                                                                              //
+  function TodosListCtrl($scope) {                                                                             // 8
+    _classCallCheck(this, TodosListCtrl);                                                                      // 8
+                                                                                                               //
+    $scope.viewModel(this);                                                                                    // 9
+                                                                                                               //
+    this.hideCompleted = false;                                                                                // 11
+                                                                                                               //
+    this.helpers({                                                                                             // 13
+      tasks: function () {                                                                                     // 14
+        function tasks() {                                                                                     // 13
+          var selector = {};                                                                                   // 15
+                                                                                                               //
+          // If hide completed is checked, filter tasks                                                        //
+          if (this.getReactively('hideCompleted')) {                                                           // 18
+            selector.checked = {                                                                               // 19
+              $ne: true                                                                                        // 20
+            };                                                                                                 // 19
+          }                                                                                                    // 22
+                                                                                                               //
+          // Show newest tasks at the top                                                                      //
+          return Tasks.find(selector, {                                                                        // 25
+            sort: {                                                                                            // 26
+              createdAt: -1                                                                                    // 27
+            }                                                                                                  // 26
+          });                                                                                                  // 25
+        }                                                                                                      // 30
+                                                                                                               //
+        return tasks;                                                                                          // 13
+      }(),                                                                                                     // 13
+      incompleteCount: function () {                                                                           // 32
+        function incompleteCount() {                                                                           // 13
+          return Tasks.find({                                                                                  // 33
+            checked: {                                                                                         // 34
+              $ne: true                                                                                        // 35
+            }                                                                                                  // 34
+          }).count();                                                                                          // 33
+        }                                                                                                      // 38
+                                                                                                               //
+        return incompleteCount;                                                                                // 13
+      }()                                                                                                      // 13
+    });                                                                                                        // 13
+  }                                                                                                            // 41
+                                                                                                               //
+  TodosListCtrl.prototype.addTask = function () {                                                              //
+    function addTask(newTask) {                                                                                //
+      // Insert a task into the collection                                                                     //
+      Tasks.insert({                                                                                           // 45
+        text: newTask,                                                                                         // 46
+        createdAt: new Date()                                                                                  // 47
+      });                                                                                                      // 45
+                                                                                                               //
+      // Clear form                                                                                            //
+      this.newTask = '';                                                                                       // 51
+    }                                                                                                          // 52
+                                                                                                               //
+    return addTask;                                                                                            //
+  }();                                                                                                         //
+                                                                                                               //
+  TodosListCtrl.prototype.setChecked = function () {                                                           //
+    function setChecked(task) {                                                                                //
+      // Set the checked property to the opposite of its current value                                         //
+      Tasks.update(task._id, {                                                                                 // 57
+        $set: {                                                                                                // 58
+          checked: !task.checked                                                                               // 59
+        }                                                                                                      // 58
+      });                                                                                                      // 57
+    }                                                                                                          // 62
+                                                                                                               //
+    return setChecked;                                                                                         //
+  }();                                                                                                         //
+                                                                                                               //
+  TodosListCtrl.prototype.removeTask = function () {                                                           //
+    function removeTask(task) {                                                                                //
+      Tasks.remove(task._id);                                                                                  // 65
+    }                                                                                                          // 66
+                                                                                                               //
+    return removeTask;                                                                                         //
+  }();                                                                                                         //
+                                                                                                               //
+  return TodosListCtrl;                                                                                        //
+}();                                                                                                           //
+                                                                                                               //
+module.export("default",exports.default=(angular.module('todosList', [angularMeteor]).component('todosList', {
+  templateUrl: 'imports/components/todosList/todosList.html',                                                  // 74
+  controller: ['$scope', TodosListCtrl]                                                                        // 75
+})));                                                                                                          // 73
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-},"guestUpdates":{"guestUpdates.js":function(){
+}]}},"api":{"tasks.js":["meteor/mongo",function(require,exports,module){
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                          //
-// client/guestUpdates/guestUpdates.js                                                                      //
-//                                                                                                          //
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                            //
-                                                                                                            //
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                             //
+// imports/api/tasks.js                                                                                        //
+//                                                                                                             //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                               //
+module.export({Tasks:function(){return Tasks}});var Mongo;module.import('meteor/mongo',{"Mongo":function(v){Mongo=v}});
+                                                                                                               //
+var Tasks = new Mongo.Collection('tasks');                                                                     // 3
+                                                                                                               //
+if (Meteor.isServer) {                                                                                         // 5
+  // This code only runs on the server                                                                         //
+                                                                                                               //
+  // e.g.:                                                                                                     //
+  // Meteor.publish('tasks', function tasksPublication() {                                                     //
+  //  return Tasks.find();                                                                                     //
+  // });                                                                                                       //
+}                                                                                                              // 12
+                                                                                                               //
+Meteor.methods({                                                                                               // 14
+  // e.g.:                                                                                                     //
+                                                                                                               //
+  // 'tasks.insert' (text) {                                                                                   //
+  //                                                                                                           //
+  // },                                                                                                        //
+                                                                                                               //
+  // 'tasks.remove' (taskId) {                                                                                 //
+  //                                                                                                           //
+  // }                                                                                                         //
+});                                                                                                            // 14
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-}},"home.js":function(){
+}]}},"client":{"main.html.js":function(){
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                          //
-// client/home.js                                                                                           //
-//                                                                                                          //
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                            //
-Template.home.onCreated(function () {                                                                       // 1
-  var _this = this;                                                                                         // 1
-                                                                                                            //
-  this.autorun(function () {                                                                                // 2
-    _this.subscribe('GuestUpdates.all');                                                                    // 3
-  });                                                                                                       // 4
-});                                                                                                         // 5
-                                                                                                            //
-Template.currentGuests.helpers({                                                                            // 7
-  getNumberOfGuests: function () {                                                                          // 8
-    function getNumberOfGuests() {                                                                          // 7
-      return getFieldAmount(GuestUpdates.find().fetch(), function () {                                      // 9
-        return true;                                                                                        // 10
-      });                                                                                                   // 11
-    }                                                                                                       // 12
-                                                                                                            //
-    return getNumberOfGuests;                                                                               // 7
-  }()                                                                                                       // 7
-});                                                                                                         // 7
-                                                                                                            //
-Template.genderRatio.helpers({                                                                              // 15
-  getNumberOfWomen: function () {                                                                           // 16
-    function getNumberOfWomen() {                                                                           // 15
-      return getFieldAmount(GuestUpdates.find().fetch(), function (guestUpdate) {                           // 17
-        return guestUpdate.gender === 'GENDER_FEMALE';                                                      // 18
-      });                                                                                                   // 19
-    }                                                                                                       // 20
-                                                                                                            //
-    return getNumberOfWomen;                                                                                // 15
-  }(),                                                                                                      // 15
-  getNumberOfMen: function () {                                                                             // 21
-    function getNumberOfMen() {                                                                             // 15
-      return getFieldAmount(GuestUpdates.find().fetch(), function (guestUpdate) {                           // 22
-        return guestUpdate.gender === 'GENDER_MALE';                                                        // 23
-      });                                                                                                   // 24
-    }                                                                                                       // 25
-                                                                                                            //
-    return getNumberOfMen;                                                                                  // 15
-  }()                                                                                                       // 15
-});                                                                                                         // 15
-                                                                                                            //
-Template.ageRatio.helpers({                                                                                 // 28
-  getNumberOfTwenties: function () {                                                                        // 29
-    function getNumberOfTwenties() {                                                                        // 28
-      var guestUpdates = GuestUpdates.find({ age: 'AGE_GROUP_1' }).fetch();                                 // 30
-      var value = 0;                                                                                        // 31
-      _.each(guestUpdates, function (guestUpdate) {                                                         // 32
-        if (guestUpdate.value === 'INC') {                                                                  // 33
-          value++;                                                                                          // 34
-        } else if (guestUpdate.value === 'DEC') {                                                           // 35
-          value--;                                                                                          // 36
-        }                                                                                                   // 37
-      });                                                                                                   // 38
-      return value;                                                                                         // 39
-    }                                                                                                       // 40
-                                                                                                            //
-    return getNumberOfTwenties;                                                                             // 28
-  }(),                                                                                                      // 28
-  getNumberOfThirties: function () {                                                                        // 41
-    function getNumberOfThirties() {                                                                        // 28
-      var guestUpdates = GuestUpdates.find({ age: 'AGE_GROUP_2' }).fetch();                                 // 42
-      var value = 0;                                                                                        // 43
-      _.each(guestUpdates, function (guestUpdate) {                                                         // 44
-        if (guestUpdate.value === 'INC') {                                                                  // 45
-          value++;                                                                                          // 46
-        } else if (guestUpdate.value === 'DEC') {                                                           // 47
-          value--;                                                                                          // 48
-        }                                                                                                   // 49
-      });                                                                                                   // 50
-      return value;                                                                                         // 51
-    }                                                                                                       // 52
-                                                                                                            //
-    return getNumberOfThirties;                                                                             // 28
-  }()                                                                                                       // 28
-});                                                                                                         // 28
-                                                                                                            //
-function getFieldAmount(array, fun) {                                                                       // 56
-  var currentAmount = 0;                                                                                    // 57
-  _.each(array, function (item) {                                                                           // 58
-    var amount = item.value === 'INC' ? 1 : -1;                                                             // 59
-    currentAmount += fun(item) ? amount : 0;                                                                // 60
-  });                                                                                                       // 61
-                                                                                                            //
-  return currentAmount;                                                                                     // 63
-}                                                                                                           // 64
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                             //
+// client/main.html.js                                                                                         //
+//                                                                                                             //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                               //
+                                                                                                               // 1
+            Meteor.startup(function() {                                                                        // 2
+              var attrs = {};                                                                                  // 3
+              for (var prop in attrs) {                                                                        // 4
+                document.body.setAttribute(prop, attrs[prop]);                                                 // 5
+              }                                                                                                // 6
+            });                                                                                                // 7
+                                                                                                               // 8
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-},"router.js":function(){
+},"main.js":["angular","angular-meteor","../imports/components/todosList/todosList",function(require,exports,module){
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                          //
-// client/router.js                                                                                         //
-//                                                                                                          //
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                            //
-FlowRouter.route('/', {                                                                                     // 1
-  action: function () {                                                                                     // 2
-    function action() {                                                                                     // 1
-      BlazeLayout.render('home', {});                                                                       // 3
-    }                                                                                                       // 4
-                                                                                                            //
-    return action;                                                                                          // 1
-  }()                                                                                                       // 1
-});                                                                                                         // 1
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                             //
+// client/main.js                                                                                              //
+//                                                                                                             //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                               //
+var angular;module.import('angular',{"default":function(v){angular=v}});var angularMeteor;module.import('angular-meteor',{"default":function(v){angularMeteor=v}});var todosList;module.import('../imports/components/todosList/todosList',{"default":function(v){todosList=v}});
+                                                                                                               // 2
+                                                                                                               //
+                                                                                                               // 4
+                                                                                                               //
+angular.module('simple-todos', [angularMeteor, todosList.name]);                                               // 6
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-}},"lib":{"collections":{"guestUpdates":{"collection.js":function(){
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                          //
-// lib/collections/guestUpdates/collection.js                                                               //
-//                                                                                                          //
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                            //
-GuestUpdates = new Mongo.Collection('guestUpdates');                                                        // 1
-                                                                                                            //
-var guestUpdateSchema = new SimpleSchema({                                                                  // 3
-  _id: { type: String, regEx: SimpleSchema.RegEx.Id },                                                      // 4
-  value: { type: String }, // 'INC', or 'DEC'                                                               // 5
-  age: { type: String }, // 'AGE_GROUP_1', 'AGE_GROUP_2', 'AGE_GROUP_3', 'AGE_GROUP_4', or 'AGE_GROUP_5'    // 6
-  gender: { type: String }, // 'GENDER_MALE' or 'GENDER_FEMALE'                                             // 7
-  timestamp: { type: Date }                                                                                 // 8
-});                                                                                                         // 3
-                                                                                                            //
-GuestUpdates.attachSchema(guestUpdateSchema);                                                               // 11
-                                                                                                            //
-GuestUpdates.methods = {};                                                                                  // 13
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-}}},"_helpers.js":function(){
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                          //
-// lib/_helpers.js                                                                                          //
-//                                                                                                          //
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                            //
-Helpers = {};                                                                                               // 1
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-},"constants.js":function(){
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                          //
-// lib/constants.js                                                                                         //
-//                                                                                                          //
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                            //
-Constants = {};                                                                                             // 1
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-}}},{"extensions":[".js",".json",".html"]});
-require("./client/template.body.js");
-require("./client/template.home.js");
-require("./lib/collections/guestUpdates/collection.js");
-require("./lib/_helpers.js");
-require("./lib/constants.js");
-require("./client/guestUpdates/guestUpdates.js");
-require("./client/home.js");
-require("./client/router.js");
+}]}},{"extensions":[".js",".json",".html",".css",".scss"]});
+require("./client/main.html.js");
+require("./client/main.js");

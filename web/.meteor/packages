@@ -21,7 +21,7 @@ insecure@1.0.7                # Allow all DB writes from clients (for prototypin
 momentjs:moment
 aldeed:simple-schema
 accounts-password
-fourseven:scss
+fourseven:scss@=3.8.0_1
 simple:json-routes
 aldeed:collection2
 kadira:flow-router

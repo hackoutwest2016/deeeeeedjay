@@ -1,0 +1,10 @@
+# MacOS files
+*.DS_Store
+
+# Node files
+node_modules/
+npm-debug.log
+
+# Meteor files
+.meteor/dev_bundle
+.meteor/local

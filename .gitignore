@@ -7,3 +7,4 @@ npm-debug.log
 
 # Meteor files
 .meteor/dev_bundle
+web/.meteor/local

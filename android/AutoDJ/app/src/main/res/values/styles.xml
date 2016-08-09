@@ -3,9 +3,38 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
+        <item name="android:colorBackground">@color/colorBackground</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+    </style>
+
+    <style name="AppTheme.ColoredButton" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:textColor">@color/buttonTextColor</item>
+        <item name="android:colorAccent">@color/male</item>
+        <item name="android:colorButtonNormal">@color/colorBackground</item>
+        <item name="android:textColorSecondary">@color/grey</item>
+        <item name="android:background">@color/colorBackground</item>
+    </style>
+
+    <style name="AppTheme.Checkbox" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/sel_radiobutton_male</item>
+        <item name="android:button">@android:color/transparent</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/medium_grey</item>
+
+    </style>
+
+    <style name="AppTheme.RadioButton" parent="AppTheme.Checkbox">
+        <item name="android:background">@drawable/radiobutton_male_on</item>
     </style>
 
 </resources>

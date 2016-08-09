@@ -28,6 +28,7 @@ globals:
   GuestUpdates: true
 
   # packages
+  BlazeLayout: false
   FlowRouter: false # kadira:flow-router
   JsonRoutes: false # simple:json-routes
   moment: false # momentjs:moment
@@ -37,3 +38,5 @@ globals:
   
   # constants
   # e.g. Constants: true
+  Constansts: true
+  Helpers: true

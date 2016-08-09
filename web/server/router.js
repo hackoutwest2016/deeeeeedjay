@@ -1,5 +1,3 @@
-import { GuestUpdates } from '../imports/api/guestUpdates/collection.js';
-
 JsonRoutes.add('post', '/guestUpdate', (req, res, next) => {
   const { age, gender, value } = req.body;
   const timestamp = new Date(+req.body.timestamp);

@@ -1,4 +1,4 @@
-import { Mongo } from 'meteor/mongo';
+GuestUpdates = new Mongo.Collection('guestUpdates');
 
 const guestUpdateSchema = new SimpleSchema({
   _id: { type: String, regEx: SimpleSchema.RegEx.Id },
@@ -8,7 +8,6 @@ const guestUpdateSchema = new SimpleSchema({
   timestamp: { type: Date },
 });
 
-const guestUpdatesCollection = new Mongo.Collection('guestUpdates');
-guestUpdatesCollection.attachSchema(guestUpdateSchema);
+GuestUpdates.attachSchema(guestUpdateSchema);
 
-export const GuestUpdates = guestUpdatesCollection;
+GuestUpdates.methods = {};

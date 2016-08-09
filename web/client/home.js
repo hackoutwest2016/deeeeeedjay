@@ -4,6 +4,14 @@ Template.home.onCreated(function() {
   });
 });
 
+Template.currentGuests.helpers({
+  getNumberOfGuests() {
+    return getFieldAmount(GuestUpdates.find().fetch(), () => {
+      return true;
+    });
+  },
+});
+
 function getFieldAmount(array, fun) {
   let currentAmount = 0;
   _.each(array, (item) => {

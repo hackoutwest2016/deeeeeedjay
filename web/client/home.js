@@ -142,7 +142,7 @@ Template.nowPlaying.onCreated(function() {
         } else {
           Session.set('currentTrack', tracks[0]);
         }
-        
+
         let track = Session.get('currentTrack');
         $('#player').attr('src', track.preview_url);
         let name = (track.name.split('- ')[1]);
@@ -162,7 +162,6 @@ Template.nowPlaying.onCreated(function() {
     else if (time === 4) {
         time = -1;
     }
-    console.log('time: ',time)
   },1000);
 });
 

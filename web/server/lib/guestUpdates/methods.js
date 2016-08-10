@@ -50,3 +50,19 @@ GuestUpdates.methods.getPlaylist = new ValidatedMethod({
   },
 });
 
+GuestUpdates.methods.getTracksFromYear = new ValidatedMethod({
+  name: 'GuestUpdates.methods.getTracksFromYear',
+
+  validate: new SimpleSchema({
+    yearInterval: { type: String },
+    limit: { type: Number } 
+  }).validator(),
+
+  run({ yearInterval, limit }) {
+    const spotifyApi = new SpotifyWebApi();
+
+    let response = spotifyApi.searchTracks('year:'+yearInterval, {limit});
+    
+    return response.data;
+  }
+})

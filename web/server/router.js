@@ -1,6 +1,8 @@
 JsonRoutes.add('post', '/guestUpdate', (req, res, next) => {
+  console.log("asdf")
   const { age, gender, value } = req.body;
   const timestamp = new Date(+req.body.timestamp);
+
 
   let options = {
     data: {

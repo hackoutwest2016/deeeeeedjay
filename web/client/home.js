@@ -122,7 +122,7 @@ Template.nowPlaying.onCreated(function() {
       })
       Session.set('tracks', tracks);
     }
-  });  
+  });
 
   let trackNr = 0;
   let time = 0;
@@ -231,14 +231,10 @@ function getTracksFromAgeGroup(currentAgeGroup, limit) {
   })
 }
 
-<<<<<<< HEAD
 function getCurrentNumberOfGuests() {
   return GuestUpdates.find({value: 'INC'}).count() -
          GuestUpdates.find({value: 'DEC'}).count();
 }
-=======
-
->>>>>>> 14eebb57bd2b5c5d6f467d162c921d6bc91ea1ad
 
 function getCurrentAgeGroup() {
   let updates = GuestUpdates.find().fetch();

@@ -13,12 +13,13 @@
 		{{> nextTrack }}
 
   </div>
+  <iframe id="player" src=""></iframe>
 </template>
 
 <template name="nowPlaying">
 	<div id="now-playing">
 		<span class="left-col">Now Playing:</span>
-		<span class="mid-col">Håkan Hellström - Din tid kommer</span>
+		<span class="mid-col">{{ getCurrentTrack }}</span>
 		<span class="right-col">&nbsp;</span>
 	</div>
 </template>

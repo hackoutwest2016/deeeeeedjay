@@ -4,21 +4,43 @@ const AGE_GROUP_3 = 40;
 const AGE_GROUP_4 = 50;
 const AGE_GROUP_5 = 60;
 
+const houseTrigger = 5;
+const danceTrigger = 10;
+
+
 Template.home.onCreated(function() {
   this.autorun(() => {
-    this.subscribe('GuestUpdates.all');
-    
     var options = {
       showDialog: true, // Whether or not to force the user to approve the app again if they’ve already done so.
       requestPermissions: ['user-read-email'] // Spotify access scopes.
     };
     Meteor.loginWithSpotify(options, function(err) {
       console.log(err || "No error");
-
+    
     });
+  
+  Session.set('currentNumberOfGuests', getCurrentNumberOfGuests());
+  Session.set('getCurrentAgeGroup', getCurrentAgeGroup());
   });
+
 });
 
+Template.home.helpers({
+  guestAmount() {
+    const currentNumberOfGuests = Session.get('currentNumberOfGuests');
+    if (currentNumberOfGuests < houseTrigger) {
+      return 'carouselLounge';
+    } else if (currentNumberOfGuests < danceTrigger) {
+      return 'carouselHouse';
+    }
+    return 'carouselDance';
+  },
+  getAgeGroupAmount(ageString) {
+    const inc = GuestUpdates.find({ age: ageString, value: 'INC' }).count();
+    const dec = GuestUpdates.find({ age: ageString, value: 'DEC' }).count();
+    return inc - dec;
+  },
+});
 
 Template.carousel.onRendered(() => {
   $('#carousel').slick({
@@ -32,43 +54,161 @@ Template.carousel.onRendered(() => {
 });
 
 Template.carousel.helpers({
-  guestAmount() {
-    console.log(Session.get('currentNumberOfGuests'));
-    return 'lounge';
-  },
-  ageGroup() {
-    let templateName;
-    switch(Session.get('currentAgeGroup')) {
-      case 'AGE_GROUP_1':
-        templateName = 'loungeOne';
-        break;
-      case 'AGE_GROUP_2':
-        templateName = 'loungeTwo';
-        break;
-      case 'AGE_GROUP_3':
-        templateName = 'loungeThree';
-        break;
-      case 'AGE_GROUP_4':
-        templateName = 'loungeFour';
-        break;
-      case 'AGE_GROUP_5':
-        templateName = 'loungeFive';
-        break;
+  getSlideOne() {
+    let currentNumberOfGuests = Session.get('currentNumberOfGuests');
+    let templateName = 'slideOne';
+    if(currentNumberOfGuests < houseTrigger) {
+      templateName += 'Lounge';
+    } else if(currentNumberOfGuests < danceTrigger) {
+      templateName += 'House';
+    } else {
+      templateName += 'Dance';
     }
     return templateName;
   },
-  getAgeGroupAmount(ageString) {
-    const inc = GuestUpdates.find({ age: ageString, value: 'INC' }).count();
-    const dec = GuestUpdates.find({ age: ageString, value: 'DEC' }).count();
-    return inc - dec;
+  getSlideTwo() {
+    let currentNumberOfGuests = Session.get('currentNumberOfGuests');
+    let templateName = 'slideTwo';
+    if(currentNumberOfGuests < houseTrigger) {
+      templateName += 'Lounge';
+    } else if(currentNumberOfGuests < danceTrigger) {
+      templateName += 'House';
+    } else {
+      templateName += 'Dance';
+    }
+    return templateName;
+  },
+  getSlideThree() {
+    let currentNumberOfGuests = Session.get('currentNumberOfGuests');
+    let templateName = 'slideThree';
+    if(currentNumberOfGuests < houseTrigger) {
+      templateName += 'Lounge';
+    } else if(currentNumberOfGuests < danceTrigger) {
+      templateName += 'House';
+    } else {
+      templateName += 'Dance';
+    }
+    return templateName;
+  },
+  getSlideFour() {
+    let currentNumberOfGuests = Session.get('currentNumberOfGuests');
+    let templateName = 'slideFour';
+    if(currentNumberOfGuests < houseTrigger) {
+      templateName += 'Lounge';
+    } else if(currentNumberOfGuests < danceTrigger) {
+      templateName += 'House';
+    } else {
+      templateName += 'Dance';
+    }
+    return templateName;
+  },
+  getSlideFive() {
+    let currentNumberOfGuests = Session.get('currentNumberOfGuests');
+    let templateName = 'slideFive';
+    if(currentNumberOfGuests < houseTrigger) {
+      templateName += 'Lounge';
+    } else if(currentNumberOfGuests < danceTrigger) {
+      templateName += 'House';
+    } else {
+      templateName += 'Dance';
+    }
+    return templateName;
   },
 });
 
-Template.loungeOne.inheritsHelpersFrom('carousel');
-Template.loungeTwo.inheritsHelpersFrom('carousel');
-Template.loungeThree.inheritsHelpersFrom('carousel');
-Template.loungeFour.inheritsHelpersFrom('carousel');
-Template.loungeFive.inheritsHelpersFrom('carousel');
+// Template.carouselLounge.helpers({
+//   ageGroup() {
+//     let templateName;
+//
+//     console.log('Lounge: ' + Session.get('currentAgeGroup'));
+//     switch(Session.get('currentAgeGroup')) {
+//       case 'AGE_GROUP_1':
+//         templateName = 'loungeOne';
+//         break;
+//       case 'AGE_GROUP_2':
+//         templateName = 'loungeTwo';
+//         break;
+//       case 'AGE_GROUP_3':
+//         templateName = 'loungeThree';
+//         break;
+//       case 'AGE_GROUP_4':
+//         templateName = 'loungeFour';
+//         break;
+//       case 'AGE_GROUP_5':
+//         templateName = 'loungeFive';
+//         break;
+//     }
+//     return templateName;
+//   },
+// });
+//
+// Template.carouselHouse.helpers({
+//   ageGroup() {
+//     let templateName;
+//
+//     console.log('House: ' + Session.get('currentAgeGroup'));
+//     switch(Session.get('currentAgeGroup')) {
+//       case 'AGE_GROUP_1':
+//         templateName = 'houseOne';
+//         break;
+//       case 'AGE_GROUP_2':
+//         templateName = 'houseTwo';
+//         break;
+//       case 'AGE_GROUP_3':
+//         templateName = 'houseThree';
+//         break;
+//       case 'AGE_GROUP_4':
+//         templateName = 'houseFour';
+//         break;
+//       case 'AGE_GROUP_5':
+//         templateName = 'houseFive';
+//         break;
+//     }
+//     return templateName;
+//   },
+// });
+//
+// Template.carouselDance.helpers({
+//   ageGroup() {
+//     let templateName;
+//
+//     console.log('Dance: ' + Session.get('currentAgeGroup'));
+//     switch(Session.get('currentAgeGroup')) {
+//       case 'AGE_GROUP_1':
+//         templateName = 'danceOne';
+//         break;
+//       case 'AGE_GROUP_2':
+//         templateName = 'danceTwo';
+//         break;
+//       case 'AGE_GROUP_3':
+//         templateName = 'danceThree';
+//         break;
+//       case 'AGE_GROUP_4':
+//         templateName = 'danceFour';
+//         break;
+//       case 'AGE_GROUP_5':
+//         templateName = 'danceFive';
+//         break;
+//     }
+//     return templateName;
+//   },
+// });
+//
+// Template.loungeOne.inheritsHelpersFrom('home');
+// Template.loungeTwo.inheritsHelpersFrom('home');
+// Template.loungeThree.inheritsHelpersFrom('home');
+// Template.loungeFour.inheritsHelpersFrom('home');
+// Template.loungeFive.inheritsHelpersFrom('home');
+// Template.houseOne.inheritsHelpersFrom('home');
+// Template.houseTwo.inheritsHelpersFrom('home');
+// Template.houseThree.inheritsHelpersFrom('home');
+// Template.houseFour.inheritsHelpersFrom('home');
+// Template.houseFive.inheritsHelpersFrom('home');
+// Template.danceOne.inheritsHelpersFrom('home');
+// Template.danceTwo.inheritsHelpersFrom('home');
+// Template.danceThree.inheritsHelpersFrom('home');
+// Template.danceFour.inheritsHelpersFrom('home');
+// Template.danceFive.inheritsHelpersFrom('home');
 
 Template.currentGuests.helpers({
   getNumberOfGuests() {
@@ -231,11 +371,6 @@ function getTracksFromAgeGroup(currentAgeGroup, limit) {
   })
 }
 
-function getCurrentNumberOfGuests() {
-  return GuestUpdates.find({value: 'INC'}).count() -
-         GuestUpdates.find({value: 'DEC'}).count();
-}
-
 function getCurrentAgeGroup() {
   let updates = GuestUpdates.find().fetch();
   let ageArray = new Array(5).fill(0);
@@ -284,6 +419,13 @@ function getCurrentAgeGroup() {
       break;
   }
 
+}
+
+function getCurrentNumberOfGuests() {
+  let inc = GuestUpdates.find({value: 'INC'}).count();
+  let dec = GuestUpdates.find({value: 'DEC'}).count();
+  console.log(inc - dec);
+  return (inc - dec);
 }
 
 function incrementTrackNumber(trackNr, tracks) {

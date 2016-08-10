@@ -9,7 +9,3 @@ Meteor.startup(() => {
     { upsert: true }
   );
 });
-
-Meteor.publish('GuestUpdates.all', () => {
-  return GuestUpdates.find();
-});

@@ -6,7 +6,7 @@
 		</div> -->
 		{{> nowPlaying }}
 		
-		{{> carousel}}
+		{{> carousel }}
 
 		<!-- <h1>DeeeeeDjay</h1> -->
 		<!-- {{> currentGuests }} -->
@@ -34,23 +34,117 @@
   </div>
 </template>
 
+
 <template name="carousel">
 	<div id="carousel">
-		{{#if isLounge}}
-			{{> Template.dynamic template=ageGroup}}
-		{{/if}}
-		{{#if isHouse}}
-			<div>
-				<h1>Carousel House</h1>
+		<div id="carousel-slide-one" class="slide-text-container">
+			<div class="slide-content">
+				{{> Template.dynamic template=getSlideOne}}
 			</div>
-			<!-- {{> carousel-house}} -->
-		{{/if}}
-		{{#if isDance}}
-			<div class="">
-				<h1>CarouselHouse</h1>
+		</div>
+		<div id="carousel-slide-two" class="slide-text-container">
+			<div class="slide-content">
+				{{> Template.dynamic template=getSlideTwo}}
 			</div>
-			<!-- {{> carousel-dance}} -->
-		{{/if}}
+		</div>
+		<div id="carousel-slide-three" class="slide-text-container">
+			<div class="slide-content">
+				{{> Template.dynamic template=getSlideThree}}
+			</div>
+		</div>
+		<div id="carousel-slide-four" class="slide-text-container">
+			<div class="slide-content">
+				{{> Template.dynamic template=getSlideFour}}
+			</div>
+		</div>
+		<div id="carousel-slide-five" class="slide-text-container">
+			<div class="slide-content">
+				{{> Template.dynamic template=getSlideFive}}
+			</div>
+		</div>
+	</div>
+</template>
+
+<template name="slideOneLounge">
+	<h1>'slideOneLounge'</h1>
+</template>
+
+<template name="slideTwoLounge">
+	<h1>'slideTwoLounge'</h1>
+</template>
+
+<template name="slideThreeLounge">
+	<h1>'slideThreeLounge'</h1>
+</template>
+
+<template name="slideFourLounge">
+	<h1>'slideFourLounge'</h1>
+</template>
+
+<template name="slideFiveLounge">
+	<h1>'slideFiveLounge'</h1>
+</template>
+
+
+
+<template name="slideOneHouse">
+	<h1>'slideOneHouse'</h1>
+</template>
+
+<template name="slideTwoHouse">
+	<h1>'slideTwoHouse'</h1>
+</template>
+
+<template name="slideThreeHouse">
+	<h1>'slideThreeHouse'</h1>
+</template>
+
+<template name="slideFourHouse">
+	<h1>'slideFourHouse'</h1>
+</template>
+
+<template name="slideFiveHouse">
+	<h1>'slideFiveHouse'</h1>
+</template>
+
+
+
+<template name="slideOneDance">
+	<h1>'slideOneDance'</h1>
+</template>
+
+<template name="slideTwoDance">
+	<h1>'slideTwoDance'</h1>
+</template>
+
+<template name="slideThreeDance">
+	<h1>'slideThreeDance'</h1>
+</template>
+
+<template name="slideFourDance">
+	<h1>'slideFourDance'</h1>
+</template>
+
+<template name="slideFiveDance">
+	<h1>'slideFiveDance'</h1>
+</template>
+
+
+<!-- <template name="carouselLounge">
+	<div id="carouselLounge">
+		{{> Template.dynamic template=ageGroup}}
+	</div>
+</template>
+
+<template name="carouselHouse">
+	<div id="carouselHouse">
+		{{> Template.dynamic template=ageGroup}}
+	</div>
+</template>
+
+<template name="carouselDance">
+	<div id="carouselDance">
+		{{> Template.dynamic template=ageGroup}}
 	</div>
 </template>
 
@@ -145,41 +239,189 @@
 </template>
 
 
-<!-- <template name="carousel-house">
-	{{#if ageGroupOne}}
-		{{> ageGroupOneHouse}}
-	{{/if}}
-	{{#if ageGroupTwo}}
-		{{> ageGroupTwoHouse}}
-	{{/if}}
-	{{#if ageGroupThree}}
-		{{> ageGroupThreeHouse}}
-	{{/if}}
-	{{#if ageGroupFour}}
-		{{> ageGroupFourHouse}}
-	{{/if}}
-	{{#if ageGroupFive}}
-		{{> ageGroupFiveHouse}}
-	{{/if}}
+
+<template name="houseOne">
+	<div class="age-group-one-house slide-container">
+		<div class="age-group-one-house slide-content">
+			<h1>Age Group One Lounge</h1>
+		</div>
+	</div>
+	<div class="age-group-one-house slide-container">
+		<div class="age-group-one-house slide-content">
+			<h1>Take it easy and relax to some modern house music</h1>
+		</div>
+	</div>
+	<div class="age-group-one-house slide-container">
+		<div class="age-group-one-house slide-content">
+			<h1>There's currently {{ getAgeGroupAmount 'AGE_GROUP_1'}}</h1>
+		</div>
+	</div>
 </template>
 
-<template name="carousel-dance">
-	{{#if ageGroupOne}}
-		{{> ageGroupOneDance}}
-	{{/if}}
-	{{#if ageGroupTwo}}
-		{{> ageGroupTwoDance}}
-	{{/if}}
-	{{#if ageGroupThree}}
-		{{> ageGroupThreeDance}}
-	{{/if}}
-	{{#if ageGroupFour}}
-		{{> ageGroupFourDance}}
-	{{/if}}
-	{{#if ageGroupFive}}
-		{{> ageGroupFiveDance}}
-	{{/if}}
+<template name="houseTwo">
+	<div class="age-group-two-house slide-container">
+		<div class="age-group-two-house slide-content">
+			<h1>Age Group Two Lounge</h1>
+		</div>
+	</div>
+	<div class="age-group-two-house slide-container">
+		<div class="age-group-two-house slide-content">
+			<h1>Take it easy and relax to some house music from the 90's</h1>
+		</div>
+	</div>
+	<div class="age-group-two-house slide-container">
+		<div class="age-group-two-house slide-content">
+			<h1>There's currently {{ getAgeGroupAmount 'AGE_GROUP_2'}}</h1>
+		</div>
+	</div>
+</template>
+
+<template name="houseThree">
+	<div class="age-group-three-house slide-container">
+		<div class="age-group-three-house slide-content">
+			<h1>Age Group Three Lounge</h1>
+		</div>
+	</div>
+	<div class="age-group-three-house slide-container">
+		<div class="age-group-three-house slide-content">
+			<h1>Take it easy and relax to some house music from the 80's</h1>
+		</div>
+	</div>
+	<div class="age-group-three-house slide-container">
+		<div class="age-group-three-house slide-content">
+			<h1>There's currently {{ getAgeGroupAmount 'AGE_GROUP_3'}}</h1>
+		</div>
+	</div>
+</template>
+
+<template name="houseFour">
+	<div class="age-group-four-house slide-container">
+		<div class="age-group-four-house slide-content">
+			<h1>Age Group Four Lounge</h1>
+		</div>
+	</div>
+	<div class="age-group-four-house slide-container">
+		<div class="age-group-four-house slide-content">
+			<h1>Take it easy and relax to some house music from the 70's</h1>
+		</div>
+	</div>
+	<div class="age-group-four-house slide-container">
+		<div class="age-group-four-house slide-content">
+			<h1>There's currently {{ getAgeGroupAmount 'AGE_GROUP_4'}}</h1>
+		</div>
+	</div>
+</template>
+
+<template name="houseFive">
+	<div class="age-group-five-house slide-container">
+		<div class="age-group-five-house slide-content">
+			<h1>Age Group Five Lounge</h1>
+		</div>
+	</div>
+	<div class="age-group-five-house slide-container">
+		<div class="age-group-five-house slide-content">
+			<h1>Take it easy and relax to some house music from the 60's</h1>
+		</div>
+	</div>
+	<div class="age-group-five-house slide-container">
+		<div class="age-group-five-house slide-content">
+			<h1>There's currently {{ getAgeGroupAmount 'AGE_GROUP_5'}}</h1>
+		</div>
+	</div>
+</template>
+
+
+<template name="danceOne">
+	<div class="age-group-one-dance slide-container">
+		<div class="age-group-one-dance slide-content">
+			<h1>Age Group One Lounge</h1>
+		</div>
+	</div>
+	<div class="age-group-one-dance slide-container">
+		<div class="age-group-one-dance slide-content">
+			<h1>Take it easy and relax to some modern dance music</h1>
+		</div>
+	</div>
+	<div class="age-group-one-dance slide-container">
+		<div class="age-group-one-dance slide-content">
+			<h1>There's currently {{ getAgeGroupAmount 'AGE_GROUP_1'}}</h1>
+		</div>
+	</div>
+</template>
+
+<template name="danceTwo">
+	<div class="age-group-two-dance slide-container">
+		<div class="age-group-two-dance slide-content">
+			<h1>Age Group Two Lounge</h1>
+		</div>
+	</div>
+	<div class="age-group-two-dance slide-container">
+		<div class="age-group-two-dance slide-content">
+			<h1>Take it easy and relax to some dance music from the 90's</h1>
+		</div>
+	</div>
+	<div class="age-group-two-dance slide-container">
+		<div class="age-group-two-dance slide-content">
+			<h1>There's currently {{ getAgeGroupAmount 'AGE_GROUP_2'}}</h1>
+		</div>
+	</div>
+</template>
+
+<template name="danceThree">
+	<div class="age-group-three-dance slide-container">
+		<div class="age-group-three-dance slide-content">
+			<h1>Age Group Three Lounge</h1>
+		</div>
+	</div>
+	<div class="age-group-three-dance slide-container">
+		<div class="age-group-three-dance slide-content">
+			<h1>Take it easy and relax to some dance music from the 80's</h1>
+		</div>
+	</div>
+	<div class="age-group-three-dance slide-container">
+		<div class="age-group-three-dance slide-content">
+			<h1>There's currently {{ getAgeGroupAmount 'AGE_GROUP_3'}}</h1>
+		</div>
+	</div>
+</template>
+
+<template name="danceFour">
+	<div class="age-group-four-dance slide-container">
+		<div class="age-group-four-dance slide-content">
+			<h1>Age Group Four Lounge</h1>
+		</div>
+	</div>
+	<div class="age-group-four-dance slide-container">
+		<div class="age-group-four-dance slide-content">
+			<h1>Take it easy and relax to some dance music from the 70's</h1>
+		</div>
+	</div>
+	<div class="age-group-four-dance slide-container">
+		<div class="age-group-four-dance slide-content">
+			<h1>There's currently {{ getAgeGroupAmount 'AGE_GROUP_4'}}</h1>
+		</div>
+	</div>
+</template>
+
+<template name="danceFive">
+	<div class="age-group-five-dance slide-container">
+		<div class="age-group-five-dance slide-content">
+			<h1>Age Group Five Lounge</h1>
+		</div>
+	</div>
+	<div class="age-group-five-dance slide-container">
+		<div class="age-group-five-dance slide-content">
+			<h1>Take it easy and relax to some dance music from the 60's</h1>
+		</div>
+	</div>
+	<div class="age-group-five-dance slide-container">
+		<div class="age-group-five-dance slide-content">
+			<h1>There's currently {{ getAgeGroupAmount 'AGE_GROUP_5'}}</h1>
+		</div>
+	</div>
 </template> -->
+
+
 
 
 

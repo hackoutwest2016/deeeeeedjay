@@ -44,13 +44,16 @@ Template.home.helpers({
 
 Template.carousel.onRendered(() => {
   $('#carousel').slick({
-    autoplay: true,
-    autoplaySpeed: 2000,
+    autoplay: false,
+    autoplaySpeed: 5000,
     infinite: true,
     pauseOnFocus: false,
     pauseOnHover: false,
     pauseOnDotsHover: false,
   });
+  Meteor.setTimeout(function(){
+    $('#carousel').slickPlay();
+  },1000);
 });
 
 Template.carousel.helpers({
@@ -231,74 +234,94 @@ Template.genderRatio.helpers({
   },
 });
 
+var lastAgeGroup = "none";
+
 Template.nowPlaying.onCreated(function() {
 
-  let currentAgeGroup = getCurrentAgeGroup();
+  this.autorun(() => {
 
-  switch (currentAgeGroup) {
-    case 'AGE_GROUP_1':
-      yearInterval = '2010-2016';
-      break;
-    case 'AGE_GROUP_2':
-      yearInterval = '1995-2005';
-      break;
-    case 'AGE_GROUP_3':
-      yearInterval = '1985-1995';
-      break;
-    case 'AGE_GROUP_4':
-      yearInterval = '1975-1985';
-      break;
-    case 'AGE_GROUP_5':
-      yearInterval = '1965-1975';
-      break;
-  }
-  Meteor.call('GuestUpdates.methods.getTracksFromYear', { yearInterval: yearInterval, limit: 10 }, (err, res) => {
-    if (err) {
-      console.log(err)
-    } else {
-      let tracks = [];
-      res.body.tracks.items.forEach(function(track) {
-        tracks.push(track);
-      })
-      Session.set('tracks', tracks);
+    let currentAgeGroup = getCurrentAgeGroup();
+
+    if (currentAgeGroup !== lastAgeGroup) {
+      lastAgeGroup = currentAgeGroup;
+      console.log("New age group: " + currentAgeGroup);
+
+      switch (currentAgeGroup) {
+        case 'AGE_GROUP_1':
+          yearInterval = '2010-2016';
+          break;
+        case 'AGE_GROUP_2':
+          yearInterval = '1995-2005';
+          break;
+        case 'AGE_GROUP_3':
+          yearInterval = '1985-1995';
+          break;
+        case 'AGE_GROUP_4':
+          yearInterval = '1975-1985';
+          break;
+        case 'AGE_GROUP_5':
+          yearInterval = '1965-1975';
+          break;
+      }
+      Meteor.call('GuestUpdates.methods.getTracksFromYear', { yearInterval: yearInterval, limit: 10 }, (err, res) => {
+        if (err) {
+          console.log(err)
+        } else {
+          let tracks = [];
+          res.body.tracks.items.forEach(function(track) {
+            tracks.push(track);
+          })
+          Session.set('tracks', tracks);
+        }
+      });  
     }
   });
 
   let trackNr = 0;
-  let time = 0;
+  let time = -1;
   Meteor.setInterval(function(){
-    if(Session.get('tracks')) {
-      let tracks = Session.get('tracks');
-      trackNr = incrementTrackNumber(trackNr, tracks);
+    time++;
+    if (time === 0) {
+      if(Session.get('tracks')) {
+        let tracks = Session.get('tracks');
 
-      let track = tracks[trackNr];
+        if(Session.get('nextTrack')) {
+          Session.set('currentTrack', Session.get('nextTrack'));
+        } else {
+          Session.set('currentTrack', tracks[0]);
+        }
 
-      $('#player').attr('src', track.preview_url);
-      let name = (track.name.split('- ')[1]);
-      name = name ? name : track.name;
-      Session.set('currentTrack', name);
-      Session.set('currentArtist', track.artists[0].name);
+        let track = Session.get('currentTrack');
+        $('#player').attr('src', track.preview_url);
+        let name = (track.name.split('- ')[1]);
+        name = name ? name : track.name;
+        Session.set('currentTrackName', name);
+        Session.set('currentArtist', track.artists[0].name);
 
-      // random = Math.floor(Math.random() * (res.tracks.items.length -1) );
-      trackNr = incrementTrackNumber(trackNr, tracks);
-      let nextTrack = tracks[trackNr];
-      let nextName = (nextTrack.name.split('- ')[1]);
-      nextName = nextName ? nextName : nextTrack.name;
-      Session.set('nextTrack', nextName);
-      Session.set('nextArtist', nextTrack.artists[0].name);
+        trackNr = incrementTrackNumber(trackNr, tracks);
+        let nextTrack = tracks[trackNr];
+        Session.set('nextTrack', nextTrack);
+        let nextName = (nextTrack.name.split('- ')[1]);
+        nextName = nextName ? nextName : nextTrack.name;
+        Session.set('nextTrackName', nextName);
+        Session.set('nextArtist', nextTrack.artists[0].name);
+      }
+    }
+    else if (time === 4) {
+        time = -1;
     }
   },1000);
 });
 
 Template.nowPlaying.helpers({
   getCurrentTrack() {
-    return Session.get('currentTrack') + ' - ' + Session.get('currentArtist');
+    return Session.get('currentTrackName') + ' - ' + Session.get('currentArtist');
   }
 });
 
 Template.nextTrack.helpers({
   getNextTrack() {
-    return Session.get('nextTrack') + ' - ' + Session.get('nextArtist');
+    return Session.get('nextTrackName') + ' - ' + Session.get('nextArtist');
   }
 });
 

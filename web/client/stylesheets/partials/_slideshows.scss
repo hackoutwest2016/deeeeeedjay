@@ -20,3 +20,30 @@
   align-items: center;
   justify-content: center;
 }
+.slide-container {
+  background-size: cover;
+  background-position: center;
+  h1 {
+    font-size: 6vw;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 20px #000000;
+    text-align: center;
+    margin: 0;
+  }
+}
+.slide-container[index="0"] {
+  background-image: url(gifs/blues.gif);
+}
+.slide-container[index="1"] {
+  background-image: url(gifs/crowd.gif);
+}
+.slide-container[index="2"] {
+  background-image: url(gifs/zaralarsson.gif);
+}
+.slide-container[index="3"] {
+  background-image: url(gifs/disco.gif);
+}
+.slide-container[index="4"] {
+  background-image: url(gifs/rave.gif);
+}

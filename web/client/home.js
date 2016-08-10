@@ -4,8 +4,8 @@ const AGE_GROUP_3 = 40;
 const AGE_GROUP_4 = 50;
 const AGE_GROUP_5 = 60;
 
-const houseTrigger = 5;
-const danceTrigger = 10;
+const houseTrigger = 10;
+const danceTrigger = 20;
 
 
 Template.home.onCreated(function() {
@@ -118,7 +118,30 @@ Template.carousel.helpers({
     }
     return templateName;
   },
+  getcurrentAmountOfGuests() {
+    return Session.get('currentNumberOfGuests');
+  }
 });
+
+Template.slideOneLounge.inheritsHelpersFrom('carousel');
+Template.slideOneHouse.inheritsHelpersFrom('carousel');
+Template.slideOneDance.inheritsHelpersFrom('carousel');
+
+Template.slideTwoLounge.inheritsHelpersFrom('carousel');
+Template.slideTwoHouse.inheritsHelpersFrom('carousel');
+Template.slideTwoDance.inheritsHelpersFrom('carousel');
+
+Template.slideThreeLounge.inheritsHelpersFrom('carousel');
+Template.slideThreeHouse.inheritsHelpersFrom('carousel');
+Template.slideThreeDance.inheritsHelpersFrom('carousel');
+
+Template.slideFourLounge.inheritsHelpersFrom('carousel');
+Template.slideFourHouse.inheritsHelpersFrom('carousel');
+Template.slideFourDance.inheritsHelpersFrom('carousel');
+
+Template.slideFiveLounge.inheritsHelpersFrom('carousel');
+Template.slideFiveHouse.inheritsHelpersFrom('carousel');
+Template.slideFiveDance.inheritsHelpersFrom('carousel');
 
 // Template.carouselLounge.helpers({
 //   ageGroup() {
@@ -274,7 +297,7 @@ Template.nowPlaying.onCreated(function() {
           })
           Session.set('tracks', tracks);
         }
-      });  
+      });
     }
   });
 
@@ -448,7 +471,6 @@ function getCurrentAgeGroup() {
 function getCurrentNumberOfGuests() {
   let inc = GuestUpdates.find({value: 'INC'}).count();
   let dec = GuestUpdates.find({value: 'DEC'}).count();
-  console.log(inc - dec);
   return (inc - dec);
 }
 

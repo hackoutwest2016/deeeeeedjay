@@ -5,6 +5,8 @@
 			Now Playing: Håkan Hellström - Din tid kommer
 		</div> -->
 		{{> nowPlaying }}
+		
+		{{> carousel}}
 
 		<!-- <h1>DeeeeeDjay</h1> -->
 		<!-- {{> currentGuests }} -->
@@ -34,10 +36,152 @@
 
 <template name="carousel">
 	<div id="carousel">
-		{{> currentGuests}}
-		{{> genderRatio}}
+		{{#if isLounge}}
+			{{> Template.dynamic template=ageGroup}}
+		{{/if}}
+		{{#if isHouse}}
+			<div>
+				<h1>Carousel House</h1>
+			</div>
+			<!-- {{> carousel-house}} -->
+		{{/if}}
+		{{#if isDance}}
+			<div class="">
+				<h1>CarouselHouse</h1>
+			</div>
+			<!-- {{> carousel-dance}} -->
+		{{/if}}
 	</div>
 </template>
+
+<template name="loungeOne">
+	<div class="age-group-one-lounge slide-container">
+		<div class="age-group-one-lounge slide-content">
+			<h1>Age Group One Lounge</h1>
+		</div>
+	</div>
+	<div class="age-group-one-lounge slide-container">
+		<div class="age-group-one-lounge slide-content">
+			<h1>Take it easy and relax to some modern lounge music</h1>
+		</div>
+	</div>
+	<div class="age-group-one-lounge slide-container">
+		<div class="age-group-one-lounge slide-content">
+			<h1>There's currently {{ getAgeGroupAmount 'AGE_GROUP_1'}}</h1>
+		</div>
+	</div>
+</template>
+
+<template name="loungeTwo">
+	<div class="age-group-two-lounge slide-container">
+		<div class="age-group-two-lounge slide-content">
+			<h1>Age Group Two Lounge</h1>
+		</div>
+	</div>
+	<div class="age-group-two-lounge slide-container">
+		<div class="age-group-two-lounge slide-content">
+			<h1>Take it easy and relax to some lounge music from the 90's</h1>
+		</div>
+	</div>
+	<div class="age-group-two-lounge slide-container">
+		<div class="age-group-two-lounge slide-content">
+			<h1>There's currently {{ getAgeGroupAmount 'AGE_GROUP_2'}}</h1>
+		</div>
+	</div>
+</template>
+
+<template name="loungeThree">
+	<div class="age-group-three-lounge slide-container">
+		<div class="age-group-three-lounge slide-content">
+			<h1>Age Group Three Lounge</h1>
+		</div>
+	</div>
+	<div class="age-group-three-lounge slide-container">
+		<div class="age-group-three-lounge slide-content">
+			<h1>Take it easy and relax to some lounge music from the 80's</h1>
+		</div>
+	</div>
+	<div class="age-group-three-lounge slide-container">
+		<div class="age-group-three-lounge slide-content">
+			<h1>There's currently {{ getAgeGroupAmount 'AGE_GROUP_3'}}</h1>
+		</div>
+	</div>
+</template>
+
+<template name="loungeFour">
+	<div class="age-group-four-lounge slide-container">
+		<div class="age-group-four-lounge slide-content">
+			<h1>Age Group Four Lounge</h1>
+		</div>
+	</div>
+	<div class="age-group-four-lounge slide-container">
+		<div class="age-group-four-lounge slide-content">
+			<h1>Take it easy and relax to some lounge music from the 70's</h1>
+		</div>
+	</div>
+	<div class="age-group-four-lounge slide-container">
+		<div class="age-group-four-lounge slide-content">
+			<h1>There's currently {{ getAgeGroupAmount 'AGE_GROUP_4'}}</h1>
+		</div>
+	</div>
+</template>
+
+<template name="loungeFive">
+	<div class="age-group-five-lounge slide-container">
+		<div class="age-group-five-lounge slide-content">
+			<h1>Age Group Five Lounge</h1>
+		</div>
+	</div>
+	<div class="age-group-five-lounge slide-container">
+		<div class="age-group-five-lounge slide-content">
+			<h1>Take it easy and relax to some lounge music from the 60's</h1>
+		</div>
+	</div>
+	<div class="age-group-five-lounge slide-container">
+		<div class="age-group-five-lounge slide-content">
+			<h1>There's currently {{ getAgeGroupAmount 'AGE_GROUP_5'}}</h1>
+		</div>
+	</div>
+</template>
+
+
+<!-- <template name="carousel-house">
+	{{#if ageGroupOne}}
+		{{> ageGroupOneHouse}}
+	{{/if}}
+	{{#if ageGroupTwo}}
+		{{> ageGroupTwoHouse}}
+	{{/if}}
+	{{#if ageGroupThree}}
+		{{> ageGroupThreeHouse}}
+	{{/if}}
+	{{#if ageGroupFour}}
+		{{> ageGroupFourHouse}}
+	{{/if}}
+	{{#if ageGroupFive}}
+		{{> ageGroupFiveHouse}}
+	{{/if}}
+</template>
+
+<template name="carousel-dance">
+	{{#if ageGroupOne}}
+		{{> ageGroupOneDance}}
+	{{/if}}
+	{{#if ageGroupTwo}}
+		{{> ageGroupTwoDance}}
+	{{/if}}
+	{{#if ageGroupThree}}
+		{{> ageGroupThreeDance}}
+	{{/if}}
+	{{#if ageGroupFour}}
+		{{> ageGroupFourDance}}
+	{{/if}}
+	{{#if ageGroupFive}}
+		{{> ageGroupFiveDance}}
+	{{/if}}
+</template> -->
+
+
 
 <template name="currentGuests">
 	<div class="current-guests-container">

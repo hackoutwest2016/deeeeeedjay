@@ -48,8 +48,55 @@ Template.carousel.onRendered(() => {
     autoplay: true,
     autoplaySpeed: 2000,
     infinite: true,
+    pauseOnFocus: false,
+    pauseOnHover: false,
+    pauseOnDotsHover: false,
   });
 });
+
+Template.carousel.helpers({
+  ageGroup() {
+    let templateName;
+    switch(Session.get('currentAgeGroup')) {
+      case 'AGE_GROUP_1':
+        templateName = 'loungeOne';
+        break;
+      case 'AGE_GROUP_2':
+        templateName = 'loungeTwo';
+        break;
+      case 'AGE_GROUP_3':
+        templateName = 'loungeThree';
+        break;
+      case 'AGE_GROUP_4':
+        templateName = 'loungeFour';
+        break;
+      case 'AGE_GROUP_5':
+        templateName = 'loungeFive';
+        break;
+    }
+    return templateName;
+  },
+  isLounge() {
+    return true;
+  },
+  isHouse() {
+    return false;
+  },
+  isDance() {
+    return false;
+  },
+  getAgeGroupAmount(ageString) {
+    const inc = GuestUpdates.find({ age: ageString, value: 'INC' }).count();
+    const dec = GuestUpdates.find({ age: ageString, value: 'DEC' }).count();
+    return inc - dec;
+  },
+});
+
+Template.loungeOne.inheritsHelpersFrom('carousel');
+Template.loungeTwo.inheritsHelpersFrom('carousel');
+Template.loungeThree.inheritsHelpersFrom('carousel');
+Template.loungeFour.inheritsHelpersFrom('carousel');
+Template.loungeFive.inheritsHelpersFrom('carousel');
 
 Template.currentGuests.helpers({
   getNumberOfGuests() {

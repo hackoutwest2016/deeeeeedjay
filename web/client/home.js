@@ -22,13 +22,16 @@ Template.home.onCreated(function() {
 
 Template.carousel.onRendered(() => {
   $('#carousel').slick({
-    autoplay: true,
-    autoplaySpeed: 2000,
+    autoplay: false,
+    autoplaySpeed: 5000,
     infinite: true,
     pauseOnFocus: false,
     pauseOnHover: false,
     pauseOnDotsHover: false,
   });
+  Meteor.setTimeout(function(){
+    $('#carousel').slickPlay();
+  },1000);
 });
 
 Template.carousel.helpers({
@@ -127,7 +130,7 @@ Template.nowPlaying.onCreated(function() {
       })
       Session.set('tracks', tracks);
     }
-  });  
+  });
 
   let trackNr = 0;
   let time = -1;

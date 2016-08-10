@@ -9,13 +9,34 @@ Template.home.onCreated(function() {
     Meteor.loginWithSpotify(options, function(err) {
       console.log(err || "No error");
       
-      Meteor.call('GuestUpdates.methods.getElvis', {}, (err, res) => {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log('hej');
-        }
-      });
+      // Meteor.call('GuestUpdates.methods.getElvis', {}, (error, res) => {
+      //   if (err) {
+      //     console.log(err);
+      //   } else {
+      //     console.log(res);
+      //   }
+      // });
+
+      // Meteor.call('GuestUpdates.methods.getPlaylist', {}, (error, res) => {
+      //   if (error) {
+      //     console.log(error);
+      //   } else {
+      //     let random = Math.floor(Math.random() * (res.tracks.items.length -1) );
+      //     let trackObj = res.tracks.items[random];
+      //     $('#player').attr('src', trackObj.track.preview_url);
+      //     console.log($('#player').attr('src'));
+      //   }
+      // });
+
+
+      // Meteor.call('GuestUpdates.methods.createPlaylist', {}, (error, res) => {
+      //   if (err) {
+      //     console.log(err);
+      //   } else {
+      //     console.log("Couldn't create playlist");
+      //   }
+      // });
+
     });
   });
 });
@@ -47,6 +68,53 @@ Template.genderRatio.helpers({
       return guestUpdate.gender === 'GENDER_MALE';
     });
   },
+});
+
+Template.nowPlaying.onCreated(function() {
+
+  this.dict = new ReactiveDict();
+
+  Meteor.call('GuestUpdates.methods.getPlaylist', {}, (error, res) => {
+    if (error) {
+      console.log(error);
+    } else {
+      let random = Math.floor(Math.random() * (res.tracks.items.length -1) );
+      let trackObj = res.tracks.items[random];
+      $('#player').attr('src', trackObj.track.preview_url);
+      let name = (trackObj.track.name.split('- ')[1]);
+      name = name ? name : trackObj.track.name;
+      this.dict.set('currentTrack', name);
+      this.dict.set('currentArtist', trackObj.track.artists[0].name);
+    }
+  });
+
+
+  let time = 0;
+  this.interval = Meteor.setInterval(() => {
+    time++;
+    if(time === 2) {
+      Meteor.call('GuestUpdates.methods.getPlaylist', {}, (error, res) => {
+        if (error) {
+          console.log(error);
+        } else {
+          let random = Math.floor(Math.random() * (res.tracks.items.length -1) );
+          let trackObj = res.tracks.items[random];
+          $('#player').attr('src', trackObj.track.preview_url);
+          let name = (trackObj.track.name.split('- ')[1]);
+          name = name ? name : trackObj.track.name;
+          this.dict.set('currentTrack', name);
+          this.dict.set('currentArtist', trackObj.track.artists[0].name);
+        }
+      });
+      time = 0;
+    }
+  },1000);
+});
+
+Template.nowPlaying.helpers({
+  getCurrentTrack() {
+    return Template.instance().dict.get('currentTrack') + ' - ' + Template.instance().dict.get('currentArtist');
+  }
 });
 
 Template.ageRatio.helpers({

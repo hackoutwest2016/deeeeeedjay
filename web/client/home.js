@@ -246,18 +246,23 @@ function getCurrentAgeGroup() {
   let maxAge = _.max(ageArray);
   switch(maxAge) {
     case 0:
+      Session.set('currentAgeGroup', 'AGE_GROUP_1');
       return 'AGE_GROUP_1';
       break;
     case 1:
+      Session.set('currentAgeGroup', 'AGE_GROUP_2');
       return 'AGE_GROUP_2';
       break;
     case 2:
+      Session.set('currentAgeGroup', 'AGE_GROUP_3');
       return 'AGE_GROUP_3';
       break;
     case 3:
+      Session.set('currentAgeGroup', 'AGE_GROUP_4');
       return 'AGE_GROUP_4';
       break;
     case 4:
+      Session.set('currentAgeGroup', 'AGE_GROUP_5');
       return 'AGE_GROUP_5';
       break;
   }

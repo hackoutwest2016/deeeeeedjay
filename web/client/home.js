@@ -130,40 +130,51 @@ Template.nowPlaying.onCreated(function() {
   });  
 
   let trackNr = 0;
-  let time = 0;
+  let time = -1;
   Meteor.setInterval(function(){
-    if(Session.get('tracks')) {
-      let tracks = Session.get('tracks');
-      trackNr = incrementTrackNumber(trackNr, tracks);
+    time++;
+    if (time === 0) {
+      if(Session.get('tracks')) {
+        let tracks = Session.get('tracks');
 
-      let track = tracks[trackNr];
+        if(Session.get('nextTrack')) {
+          Session.set('currentTrack', Session.get('nextTrack'));
+        } else {
+          Session.set('currentTrack', tracks[0]);
+        }
+        
+        let track = Session.get('currentTrack');
+        $('#player').attr('src', track.preview_url);
+        let name = (track.name.split('- ')[1]);
+        name = name ? name : track.name;
+        Session.set('currentTrackName', name);
+        Session.set('currentArtist', track.artists[0].name);
 
-      $('#player').attr('src', track.preview_url);
-      let name = (track.name.split('- ')[1]);
-      name = name ? name : track.name;
-      Session.set('currentTrack', name);
-      Session.set('currentArtist', track.artists[0].name);
-
-      // random = Math.floor(Math.random() * (res.tracks.items.length -1) );
-      trackNr = incrementTrackNumber(trackNr, tracks);
-      let nextTrack = tracks[trackNr];
-      let nextName = (nextTrack.name.split('- ')[1]);
-      nextName = nextName ? nextName : nextTrack.name;
-      Session.set('nextTrack', nextName);
-      Session.set('nextArtist', nextTrack.artists[0].name);
+        trackNr = incrementTrackNumber(trackNr, tracks);
+        let nextTrack = tracks[trackNr];
+        Session.set('nextTrack', nextTrack);
+        let nextName = (nextTrack.name.split('- ')[1]);
+        nextName = nextName ? nextName : nextTrack.name;
+        Session.set('nextTrackName', nextName);
+        Session.set('nextArtist', nextTrack.artists[0].name);
+      }
     }
+    else if (time === 4) {
+        time = -1;
+    }
+    console.log('time: ',time)
   },1000);
 });
 
 Template.nowPlaying.helpers({
   getCurrentTrack() {
-    return Session.get('currentTrack') + ' - ' + Session.get('currentArtist');
+    return Session.get('currentTrackName') + ' - ' + Session.get('currentArtist');
   }
 });
 
 Template.nextTrack.helpers({
   getNextTrack() {
-    return Session.get('nextTrack') + ' - ' + Session.get('nextArtist');
+    return Session.get('nextTrackName') + ' - ' + Session.get('nextArtist');
   }
 });
 

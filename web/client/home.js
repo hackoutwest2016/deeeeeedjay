@@ -34,6 +34,10 @@ Template.carousel.onRendered(() => {
 });
 
 Template.carousel.helpers({
+  guestAmount() {
+    console.log(Session.get('currentNumberOfGuests'));
+    return 'lounge';
+  },
   ageGroup() {
     let templateName;
     switch(Session.get('currentAgeGroup')) {
@@ -54,15 +58,6 @@ Template.carousel.helpers({
         break;
     }
     return templateName;
-  },
-  isLounge() {
-    return true;
-  },
-  isHouse() {
-    return false;
-  },
-  isDance() {
-    return false;
   },
   getAgeGroupAmount(ageString) {
     const inc = GuestUpdates.find({ age: ageString, value: 'INC' }).count();

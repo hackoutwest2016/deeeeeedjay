@@ -96,38 +96,49 @@ Template.genderRatio.helpers({
   },
 });
 
+var lastAgeGroup = "none";
+
 Template.nowPlaying.onCreated(function() {
 
-  let currentAgeGroup = getCurrentAgeGroup();
+  this.autorun(() => {
 
-  switch (currentAgeGroup) {
-    case 'AGE_GROUP_1':
-      yearInterval = '2010-2016';
-      break;
-    case 'AGE_GROUP_2':
-      yearInterval = '1995-2005';
-      break;
-    case 'AGE_GROUP_3':
-      yearInterval = '1985-1995';
-      break;
-    case 'AGE_GROUP_4':
-      yearInterval = '1975-1985';
-      break;
-    case 'AGE_GROUP_5':
-      yearInterval = '1965-1975';
-      break;
-  }
-  Meteor.call('GuestUpdates.methods.getTracksFromYear', { yearInterval: yearInterval, limit: 10 }, (err, res) => {
-    if (err) {
-      console.log(err)
-    } else {
-      let tracks = [];
-      res.body.tracks.items.forEach(function(track) {
-        tracks.push(track);
-      })
-      Session.set('tracks', tracks);
+    let currentAgeGroup = getCurrentAgeGroup();
+
+    if (currentAgeGroup !== lastAgeGroup) {
+      lastAgeGroup = currentAgeGroup;
+      console.log("New age group: " + currentAgeGroup);
+
+      switch (currentAgeGroup) {
+        case 'AGE_GROUP_1':
+          yearInterval = '2010-2016';
+          break;
+        case 'AGE_GROUP_2':
+          yearInterval = '1995-2005';
+          break;
+        case 'AGE_GROUP_3':
+          yearInterval = '1985-1995';
+          break;
+        case 'AGE_GROUP_4':
+          yearInterval = '1975-1985';
+          break;
+        case 'AGE_GROUP_5':
+          yearInterval = '1965-1975';
+          break;
+      }
+      Meteor.call('GuestUpdates.methods.getTracksFromYear', { yearInterval: yearInterval, limit: 10 }, (err, res) => {
+        if (err) {
+          console.log(err)
+        } else {
+          let tracks = [];
+          res.body.tracks.items.forEach(function(track) {
+            tracks.push(track);
+          })
+          Session.set('tracks', tracks);
+        }
+      });  
     }
-  });  
+
+  })
 
   let trackNr = 0;
   let time = -1;

@@ -238,6 +238,11 @@ function getTrackIdsFromAgeGroup(currentAgeGroup, limit) {
   })
 }
 
+function getCurrentNumberOfGuests() {
+  return GuestUpdates.find({value: 'INC'}).count() -
+         GuestUpdates.find({value: 'DEC'}).count();
+}
+
 function getCurrentAgeGroup() {
   let updates = GuestUpdates.find().fetch();
   let ageArray = new Array(5).fill(0);

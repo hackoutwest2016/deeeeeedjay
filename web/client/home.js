@@ -14,10 +14,10 @@ Template.home.onCreated(function() {
     };
     Meteor.loginWithSpotify(options, function(err) {
       console.log(err || "No error");
-
+    
       let yearInterval;
       let currentAgeGroup = getCurrentAgeGroup();
-
+    
       switch (currentAgeGroup) {
         case 'AGE_GROUP_1':
           yearInterval = '2010-2016';
@@ -37,7 +37,7 @@ Template.home.onCreated(function() {
       }
       let trackIds = getTrackIdsFromYear(yearInterval, 10)
       console.log(trackIds)
-      
+    
     });
   });
 });

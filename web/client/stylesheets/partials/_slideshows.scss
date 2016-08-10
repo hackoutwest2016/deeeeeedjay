@@ -20,7 +20,7 @@
   align-items: center;
   justify-content: center;
 }
-.slide-container {
+.slide-text-container {
   background-size: cover;
   background-position: center;
   h1 {
@@ -32,18 +32,18 @@
     margin: 0;
   }
 }
-.slide-container[index="0"] {
+.slide-text-container[index="0"] {
   background-image: url(gifs/blues.gif);
 }
-.slide-container[index="1"] {
+.slide-text-container[index="1"] {
   background-image: url(gifs/crowd.gif);
 }
-.slide-container[index="2"] {
+.slide-text-container[index="2"] {
   background-image: url(gifs/zaralarsson.gif);
 }
-.slide-container[index="3"] {
+.slide-text-container[index="3"] {
   background-image: url(gifs/disco.gif);
 }
-.slide-container[index="4"] {
+.slide-text-container[index="4"] {
   background-image: url(gifs/rave.gif);
 }
